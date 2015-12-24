@@ -1,0 +1,24 @@
+{
+  "name": "zoop",
+  "version": "1.0.0",
+  "description": "Simple asteroids multiplayer game.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"Soon.\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crertel/zoop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crertel/zoop/issues"
+  },
+  "homepage": "https://github.com/crertel/zoop#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "ws": "^0.8.1"
+  }
+}
