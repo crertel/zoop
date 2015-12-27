@@ -19,6 +19,14 @@
   "homepage": "https://github.com/crertel/zoop#readme",
   "dependencies": {
     "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.1.1",
+    "jshint": "^2.8.0",
+    "node-sass": "^3.4.2",
     "ws": "^0.8.1"
   }
 }
