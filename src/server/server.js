@@ -10,10 +10,10 @@ var express = require('express');
 var kListenPort = process.env.LISTEN_PORT || 3000;
 
 var app = express();
-app.use( express.static(__dirname + '/static') );
+app.use( express.static(process.cwd() + '/static') );
 app.get('/', function _index( req,res ) {
     URFP(req);
-    res.status(200).send('Hi.');
+    res.sendFile( process.cwd() +'/static/game.html');
 });
 
 var server = http.createServer();
