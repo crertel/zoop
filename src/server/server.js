@@ -8,6 +8,8 @@ var http = require('http');
 var ws = require('ws').Server;
 var express = require('express');
 var Player = require('./player.js').Player;
+var World = require('./world.js').World;
+
 var kListenPort = process.env.LISTEN_PORT || 3000;
 var kNetworkFrameDelay = 1000 / 20;
 var kWorldFrameDelay = 1000 / 60;
@@ -22,7 +24,7 @@ app.get('/', function _index( req,res ) {
 var server = http.createServer();
 var wsServer = new ws({ server: server });
 
-var players = [];
+var world = new World(16, 16);
 
 wsServer.on('connection', onConnection);
 
@@ -35,12 +37,13 @@ server.listen(kListenPort, function _serverUp(){
 
 
 function worldFrame() {
-	console.log("World Frame");
+	world.tick(kWorldFrameDelay);
+//	console.log("World Frame");
 	setTimeout(worldFrame, kWorldFrameDelay);
 }
 
 function networkFrame() {
-	console.log("Network Frame");
+//	console.log("Network Frame");
 	setTimeout(networkFrame, kNetworkFrameDelay);
 }
 
@@ -53,17 +56,11 @@ function networkFrame() {
 function onConnection(socket) {
 	console.log('New connection from ', socket.address, ' accepted.');
 	
-	var player = new Player(socket);
-	
-	//Inform other players.
-	players.forEach( function informOfNewPlayer(player) {
-		//TODO: something cool here.
-	})
+	world.addPlayer(socket);
 	
 	socket.on('message', onMessage);
 	socket.on('close', onClose);
 	socket.player = player;
-	players.push(new Player(socket));	
 
 }
 
