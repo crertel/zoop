@@ -7,7 +7,6 @@ function URFP(x){
 var http = require('http');
 var ws = require('ws').Server;
 var express = require('express');
-var Player = require('./player.js').Player;
 var World = require('./world.js').World;
 
 var kListenPort = process.env.LISTEN_PORT || 3000;
@@ -26,7 +25,6 @@ var wsServer = new ws({ server: server });
 
 var world = new World(16, 16);
 
-wsServer.on('connection', onConnection);
 
 server.on('request', app);
 
@@ -56,7 +54,7 @@ function networkFrame() {
 function onConnection(socket) {
 	console.log('New connection from ', socket.address, ' accepted.');
 	
-	world.addPlayer(socket);
+	var player = world.addPlayer(socket);
 	
 	socket.on('message', onMessage);
 	socket.on('close', onClose);
@@ -86,5 +84,6 @@ function onClose(code, msg) {
 	console.log('Player ',player.name,' disconnected, code ', code, '(',msg,')');
 }
 
+wsServer.on('connection', onConnection);
 setTimeout(worldFrame, kWorldFrameDelay);
 setTimeout(networkFrame, kNetworkFrameDelay);

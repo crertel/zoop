@@ -1,6 +1,7 @@
 /**
  * player.js -- Player object
  */
+'use strict';
 
 /**
  * Constructor for player
@@ -15,7 +16,7 @@ function Player(socket) {
 	this.facing = 0;
 	this.lastFire = 0;
 	this.socket = socket;
-	this.name = "Unnamed Player";
+	this.name = 'Unnamed Player';
 }
 
 module.exports = {
